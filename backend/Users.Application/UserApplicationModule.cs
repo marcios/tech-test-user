@@ -9,6 +9,7 @@ namespace Users.Application
         public static void AddUserApplicationModule(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISchoolHistoryService, SchoolHistoryService>();
         }
     }
 }

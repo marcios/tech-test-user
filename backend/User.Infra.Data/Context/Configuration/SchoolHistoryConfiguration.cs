@@ -13,6 +13,7 @@ namespace Users.Infra.Data.Context.Configuration
             builder.Property(x => x.Id).HasColumnName("Id");
             builder.Property(x => x.Format).HasColumnName("Formato").HasMaxLength(255).IsRequired(false);
             builder.Property(x => x.Name).HasColumnName("Nome").HasMaxLength(255).IsRequired();
+            builder.Property(x => x.FileBase64).HasColumnName("ArquivoBase64").HasColumnType("text").IsRequired(false);
         }
     }
 }

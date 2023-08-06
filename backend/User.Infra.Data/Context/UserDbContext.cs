@@ -8,6 +8,8 @@ namespace Users.Infra.Data.Context
     {
 
         public DbSet<User> Users { get; set; }
+        public DbSet<SchoolHistory> schoolHistories { get; set; }
+        public DbSet<Scholarity> Scholarities { get; set; }
         public UserDbContext(DbContextOptions options) : base(options)
         {
         }

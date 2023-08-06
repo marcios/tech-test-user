@@ -14,6 +14,8 @@ namespace Users.Infra.Data
             service.AddDbContext<UserDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("default")));
 
             service.AddScoped<IUserRepository, UserRepository>();
+            service.AddScoped<IScholarityRepository, ScholarityRepository>();
+            
         }
     }
 }

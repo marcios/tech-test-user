@@ -13,5 +13,6 @@
         public string Scholarity { get; set; }
         public string SchoolHistoryName { get;  set; }
         public string SchoolHistoryFormat { get;  set; }
+        public string SchoolHistoryFile { get;  set; }
     }
 }

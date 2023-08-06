@@ -11,9 +11,16 @@ namespace Users.Infra.Data.Context.Configuration
             builder.ToTable("Usuarios");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).HasColumnName("Id");
-            builder.Property(x=>x.Name).HasColumnName("Nome").HasMaxLength(255).IsRequired();
+            builder.Property(x => x.Name).HasColumnName("Nome").HasMaxLength(255).IsRequired();
             builder.Property(x => x.LastName).HasColumnName("SobreNome").HasMaxLength(255).IsRequired(false);
-            builder.Property(x=>x.Email).HasColumnName("Email").HasMaxLength(255).IsRequired();
+            builder
+                .OwnsOne(x => x.Email)
+                .Property(x => x.Address)
+                .HasColumnName("Email")
+                .HasMaxLength(255)
+                .IsRequired();
+
+
             builder.Property(x => x.BirthDate).HasColumnName("DataNascimento").IsRequired();
             builder.Property(x => x.ScholarityId).HasColumnName("EscolaridadeId").IsRequired(false);
             builder.Property(x => x.SchoolHistoryId).HasColumnName("HistoricoEscolarId").IsRequired(false);
@@ -27,6 +34,7 @@ namespace Users.Infra.Data.Context.Configuration
                 .WithMany()
                 .HasForeignKey(x => x.SchoolHistoryId)
                 .IsRequired(false);
+
         }
 
     }
