@@ -60,7 +60,8 @@
                 </div>
                 <div class="col">
                     <div class="mb-3">
-                        <label for="birthDate" class="form-label">Upload Arquivo Histórico Escolar</label>
+                        <label for="birthDate" class="form-label">Arquivo Histórico Escolar</label>
+                        <span class="text-danger">(&nbsp; tamanho máximo do arquivo 2 MB&nbsp;)</span>
                         <input type="file" class="form-control" name="uploadFile" (change)="handleUpload($event)"
                             accept="application/msword, application/pdf" placeholder="Informe um arquivo para upload">
                     </div>
@@ -68,7 +69,7 @@
                 </div>
 
             </div>
-            <div class="row">
+            <div class="row" *ngIf="user.schoolHistoryId">
                 <div class="col">
                     <h6>Historico</h6>
                     <table class="table">
@@ -87,7 +88,7 @@
                                 <td>{{user.schoolHistoryName}}</td>
                                 <td>{{user.schoolHistoryFormat}}</td>
                                 <td><a [download]="user.schoolHistoryName"
-                                        href="https://localhost:7187/api/users/{{user.id}}/schoolhistories/{{user.schoolHistoryId}}/download ">{{user.schoolHistoryName}}</a>
+                                        href="{{baseUrl}}users/{{user.id}}/schoolhistories/{{user.schoolHistoryId}}/download ">{{user.schoolHistoryName}}</a>
                                 </td>
                             </tr>
 
@@ -114,6 +115,12 @@
 
             <div class="row">
                 <div class="col">
+                    <button type="button"
+                    (click)="goBackToList()"
+                    class="btn btn-outline-primary">
+                        Voltar
+                    </button>
+                &nbsp;
                     <button type="submit" class="btn btn-success">
                         Salvar
                     </button>

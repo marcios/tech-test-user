@@ -4,6 +4,9 @@ import { UserModel } from 'src/app/models/UserModel';
 import { ScholarityService } from 'src/app/services/scholarity-service.service';
 import { UserServiceService } from 'src/app/services/user-service.service';
 
+import {environment} from "../../../environments/environment"
+
+
 @Component({
   selector: 'user-register',
   templateUrl: './user-register.component.html',
@@ -11,6 +14,7 @@ import { UserServiceService } from 'src/app/services/user-service.service';
 })
 export class UserRegisterComponent {
 
+  baseUrl = environment.baseUrl;
   @Output("onEditRegister") onEditRegister: EventEmitter<UserModel|null> = new EventEmitter();
   title = 'Novo cadastro';
   errors:string[] = [];
@@ -36,11 +40,20 @@ export class UserRegisterComponent {
     return { birthDate: '', name: '', id: 1, lastName: '', email: '', schoolHistoryId: 2, scholarityId: 3 };
   }
 
+  goBackToList(){
+    this.onEditRegister.emit(null);
+
+  }
   handleUpload(event: any) {
 
 
     const file = event.target.files[0];    
-    const { name, type } = file;
+    const { name, type, size } = file;
+    const sizeLimit =  (size / (1024*1024)).toFixed(2)
+    if(parseFloat(sizeLimit)> 2){
+      alert('Tamanho do arquivo superior a 2 MB');
+      return;
+    }
     this.fileName = name;
     this.fileType = type;
     const reader = new FileReader();
@@ -66,11 +79,17 @@ export class UserRegisterComponent {
     //validar
     const errors = [];
 
+    if(!this.user.name){
+      errors.push('Informe o nome');
+    }
+
     if(!this.validateEmail(this.user.email)){
       errors.push('E-mail inválido');
     }
 
-    if(birthDate > currentDate){
+    if((isNaN(birthDate.getMinutes())))
+      errors.push('Data de nascimento inválida');
+    else if(birthDate > currentDate){
       errors.push('Data de nascimento não pode ser maior que hoje.');
     }
 
