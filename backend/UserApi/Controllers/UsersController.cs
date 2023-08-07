@@ -5,7 +5,7 @@ using Users.Domain.Interfaces.Services;
 namespace UserApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
 

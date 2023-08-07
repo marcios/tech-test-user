@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using Users.Domain.Dtos;
 using Users.Domain.Interfaces.Services;
 
