@@ -1,31 +1,51 @@
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Email</th>
-        <th scope="col">Escolaridade</th>
-        <th scope="col">Histórico</th>
-        <th>&nbsp</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <th scope="row">{{user.id}}</th>
-        <td>{{user.name}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.scholarity}}</td>
-        <td>{{user.schoolHistoryName}}</td>
-        <td>
-            <button type="button" (click)="confirmRemoveUser(user)" class="btn btn-sm btn-danger">Remover</button>
-            &nbsp;
-            <button type="button" 
-            (click)="editRegister(user)"
-            class="btn btn-sm btn-warning">Editar</button>
 
-       
-        </td>
-      </tr>
-     
-    </tbody>
-  </table>
+<div class="row">
+    <div class="col-10">&nbsp;</div>
+    <div class="col">
+        <button class="btn btn-outline-success" (click)="openNewRegister()">Novo usuário</button>
+    </div>
+</div>
+<hr>
+<div class="row" *ngIf="users.length">
+    <div class="col">
+        <table class="table table-sm table-bordered table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Escolaridade</th>
+                <th scope="col">Histórico</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <th scope="row">{{user.id}}</th>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.scholarity}}</td>
+                <td>{{user.schoolHistoryName}}</td>
+                <td>
+                    <button type="button" (click)="confirmRemoveUser(user)" class="btn btn-sm btn-danger">Remover</button>
+                    &nbsp;
+                    <button type="button" 
+                    (click)="editRegister(user)"
+                    class="btn btn-sm btn-warning">Editar</button>
+        
+               
+                </td>
+              </tr>
+             
+            </tbody>
+          </table>
+    </div>
+</div>
+
+<div class="row" *ngIf="!users.length">
+    <div class="col">
+        <p class="alert alert-block alert-warning">
+            <strong>Sem usuários cadastrados</strong>
+        </p>
+    </div>
+</div>

@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../models/UserModel';
+import {environment} from "../../environments/environment";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
 
-  private urlBase = "https://localhost:7187/Users";
+  private urlBase = `${environment.baseUrl}Users`;
 
   constructor(private _http : HttpClient) {}
 
@@ -26,17 +28,17 @@ export class UserServiceService {
   }
 
   removeUser(userId:number) {
-    return this._http.delete(`https://localhost:7187/Users/${userId}`);
+    return this._http.delete(`${this.urlBase}/${userId}`);
   }
 
   private saveNewUser(user:UserModel) {
-    return this._http.post(`https://localhost:7187/Users/`,user)
+    return this._http.post(`${this.urlBase}/`,user)
     
     ;
   } 
 
   private updateUser(user:UserModel){
-    return this._http.put(`https://localhost:7187/Users/${user.id}`,user);
+    return this._http.put(`${this.urlBase}/${user.id}`,user);
   }
   
 

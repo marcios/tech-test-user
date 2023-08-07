@@ -2,18 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Scholarity } from '../models/Scholarity';
 
+import {environment} from "../../environments/environment";
+
 @Injectable({
   providedIn: 'root'
 })
 export class ScholarityService {
 
-  private urlBase = "https://localhost:7187/api/Scholarities";
-
   constructor(private _http : HttpClient) {}
-
-
   getAllScholarities(){
-    return this._http.get<Scholarity[]>(this.urlBase);
+    return this._http.get<Scholarity[]>(`${environment.baseUrl}scholarities`);
     
   }
   
