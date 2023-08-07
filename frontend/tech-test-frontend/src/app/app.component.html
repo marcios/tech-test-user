@@ -1,0 +1,13 @@
+<div class="container container-fluid">
+ <hr>
+    <div *ngIf="!isEditUser">
+        <user-list (onEditRegister)="setCurrentUser($event!)" />
+    </div>
+    <div *ngIf="isEditUser">
+        <user-register [user]="currentUser!" (onEditRegister)="setCurrentUser($event!)" />
+    </div>
+
+</div>
+
+
+

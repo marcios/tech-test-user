@@ -1,0 +1,126 @@
+<div class="card">
+    <div class="card-header">
+        {{user.name ? user.name: 'Novo cadastro'}}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Cadastro</h5>
+        <form name="formRegister" (submit)="saveRegister($event)">
+            <input type="hidden" id="hdId" />
+
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome</label>
+                        <input [(ngModel)]="user.name" name="name" type="text" class="form-control" id="name"
+                            placeholder="Informe o nome">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Sobrenome</label>
+                        <input type="text" class="form-control" [(ngModel)]="user.lastName" name="lastname"
+                            placeholder="Informe o sobrenome">
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input required type="email"
+                            pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+                            class="form-control" [(ngModel)]="user.email" name="email" placeholder="name@example.com">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="birthDate" class="form-label">Data de nascimento</label>
+                        <input type="date" class="form-control" [(ngModel)]="user.birthDate" name="birthDate"
+                            placeholder="Informe o sobrenome">
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="scholarity" class="form-label">
+                            Escolaridade
+                        </label>
+                        <select required name="scholarity" [(ngModel)]="user.scholarityId" class="form-select"
+                            aria-label="Escolaridade" id="scholarity">
+                            <option value="">--Selecione--</option>
+                            <option [value]="scholarity.id" *ngFor="let scholarity of scholarities">
+                                {{scholarity.description}}
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="birthDate" class="form-label">Upload Arquivo Histórico Escolar</label>
+                        <input type="file" class="form-control" name="uploadFile" (change)="handleUpload($event)"
+                            accept="application/msword, application/pdf" placeholder="Informe um arquivo para upload">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Historico</h6>
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Formato</th>
+                                <th scope="col">Arquivo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">{{user.schoolHistoryId}}</th>
+                                <td>{{user.schoolHistoryName}}</td>
+                                <td>{{user.schoolHistoryFormat}}</td>
+                                <td><a [download]="user.schoolHistoryName"
+                                        href="https://localhost:7187/api/users/{{user.id}}/schoolhistories/{{user.schoolHistoryId}}/download ">{{user.schoolHistoryName}}</a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="errors.length>0">
+                <div class=" col">
+                    <div class="alert alert-block alert-danger">
+                        <strong>
+                            Aviso:
+                        </strong>
+                        <ul>
+                            <ol *ngFor="let error of errors">
+                                {{error}}
+                            </ol>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-success">
+                        Salvar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+      
+    </div>
+</div>
