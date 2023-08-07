@@ -8,5 +8,6 @@ namespace Users.Domain.Interfaces.Services
 
         Task<ResultDto<UserDto>> AddUser(UserDto userDto);
         Task<ResultDto<UserDto>> UpdateUser(UserDto userDto);
+        Task<ResultDto<bool>> RemoveUserAsync(int userId);
     }
 }

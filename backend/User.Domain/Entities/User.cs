@@ -28,6 +28,7 @@ namespace Users.Domain.Entities
 
         public void AddScholarity(Scholarity scholarity)
         {
+            this.ScholarityId = scholarity.Id;
             this.Scholarity = scholarity;
         }
 

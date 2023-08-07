@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using Users.Domain.Dtos;
 using Users.Domain.Interfaces.Services;
 
@@ -16,6 +17,14 @@ namespace UserApi.Controllers
             this._schoolHistoryService = schoolHistoryService;
         }
 
+
+        [HttpGet("download")]
+        public async Task<IActionResult> Download([FromRoute] int userId, [FromRoute] int schollHistoryId)
+        {   
+            var result = await this._schoolHistoryService.GetByAsync(userId, schollHistoryId);
+            var file = Convert.FromBase64String(result.Data.FileBase64);
+            return File(file, result.Data.Format, result.Data.Name);
+        }
 
         [HttpGet]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK, Type = typeof(ResultDto<SchoolHistoryDto>))]

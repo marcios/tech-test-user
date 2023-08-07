@@ -57,5 +57,19 @@ namespace UserApi.Controllers
 
             return BadRequest(userResult.Errors);
         }
+
+        [HttpDelete("{userId}")]
+        [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
+        [ProducesResponseType(statusCode: StatusCodes.Status400BadRequest, Type = typeof(List<string>))]
+        public async Task<IActionResult> RemoveUser([FromRoute] int userId)
+        {
+    
+            var userResult = await this._userService.RemoveUserAsync(userId);
+
+            if (userResult.Success)
+                return Ok();
+
+            return BadRequest(userResult.Errors);
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace Users.Application
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISchoolHistoryService, SchoolHistoryService>();
+            services.AddScoped<IScholarityService, ScholarityService>();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Users.Infra.Data.Repositories
 
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var user = await this._context.Users
                     .Include(x => x.Scholarity)
@@ -61,8 +61,10 @@ namespace Users.Infra.Data.Repositories
             return await this._context.Users
                       .Include(x => x.Scholarity)
                       .Include(x => x.SchoolHistory)
-                      .AsNoTracking().FirstOrDefaultAsync(x=>x.Id == id);
+                      .FirstOrDefaultAsync(x=>x.Id == id);
         }
+
+  
 
         public async Task UpdateAsync(User user)
         {

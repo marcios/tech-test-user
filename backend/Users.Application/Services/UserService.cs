@@ -52,6 +52,23 @@ namespace Users.Application.Services
             return users.Select(user => user.ToDto()).ToList();
         }
 
+        public async Task<ResultDto<bool>> RemoveUserAsync(int userId)
+        {
+            var result = new ResultDto<bool>();
+            try
+            {
+                await this._userRepository.DeleteAsync(userId);
+
+            }
+            catch (Exception ex)
+            {
+
+                result.Errors.Add(ex.Message);
+            }
+
+            return result;
+        }
+
         public async Task<ResultDto<UserDto>> UpdateUser(UserDto userDto)
         {
             var result = new ResultDto<UserDto>();
@@ -69,9 +86,9 @@ namespace Users.Application.Services
 
                 await ValidateUserEmail(userDto);
 
-                if (userDto.SchoolHistoryId.HasValue && userExist.SchoolHistoryId.Value > 0)
+                if (userDto.ScholarityId.HasValue)
                 {
-                    userExist.AddScholarity(await this._scholarityRepository.GetByIdAsync(userDto.ScholarityId.Value));
+                    user.AddScholarity(await this._scholarityRepository.GetByIdAsync(userDto.ScholarityId.Value));
                 }
 
 

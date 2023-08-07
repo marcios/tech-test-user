@@ -41,6 +41,7 @@ namespace UserApi
             .AllowAnyMethod()
             .AllowAnyOrigin()
             .AllowAnyMethod()
+            .AllowAnyHeader()
             );
 
             app.MapControllers();
